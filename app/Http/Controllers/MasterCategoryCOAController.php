@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DataTables;
 use App\Models\MasterCategoryCOA;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,7 @@ class MasterCategoryCOAController extends Controller
         MasterCategoryCOA::create($request->all());
 
         return redirect()
-            ->route('mastercategorycoas.index')
+            ->route('categories.index')
             ->with('success', 'Master Category COA created successfully.');
     }
 
@@ -102,5 +103,25 @@ class MasterCategoryCOAController extends Controller
         return redirect()
             ->route('mastercategorycoas.index')
             ->with('success', 'Master Category COA deleted successfully.');
+    }
+
+    public function data(Request $request)
+    {
+        $mastercategorycoas = MasterCategoryCOA::latest();
+        
+        dd($mastercategorycoas);
+        if ($request->ajax()) {
+            return datatables()
+                ->of($mastercategorycoas)
+                ->addIndexColumn()
+                ->addColumn('action', function($mastercategorycoas){
+                    return '
+                        <a href="/categories/'. $mastercategorycoas->id .'/edit" class="edit btn btn-success btn-sm">Edit</a> 
+                        <button class="delete btn btn-danger btn-sm" data-remote="/categories/'. $mastercategorycoas->id .'">Delete</button>
+                    ';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MasterCategoryCOAController;
+use App\Http\Controllers\MasterChartofAccountController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layouts.master');
 });
+
+Route::resource('categories', MasterCategoryCOAController::class);
+Route::get('categories/data', [MasterCategoryCOAController::class, 'data'])->name('categories.data');
+
+Route::resource('coa', MasterChartofAccountController::class);
+
+Route::resource('transaksi', TransaksiController::class);
