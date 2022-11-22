@@ -15,7 +15,7 @@ class MasterChartofAccountController extends Controller
     public function index()
     {
         $masterchartofaccounts = MasterChartofAccount::all();
-        return view('masterchartofaccount.index', compact('masterchartofaccount'));
+        return view('masterchartofaccounts.index', compact('masterchartofaccounts'));
     }
 
     /**
@@ -25,7 +25,7 @@ class MasterChartofAccountController extends Controller
      */
     public function create()
     {
-        return view('masterchartofaccount.create');
+        return view('masterchartofaccounts.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class MasterChartofAccountController extends Controller
      */
     public function show(MasterChartofAccount $masterChartofAccount)
     {
-        return view('masterchartofaccounts.show', compact('masterchartofaccounts'));
+        
     }
 
     /**
@@ -66,9 +66,9 @@ class MasterChartofAccountController extends Controller
      * @param  \App\Models\MasterChartofAccount  $masterChartofAccount
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterChartofAccount $masterChartofAccount)
+    public function edit(MasterChartofAccount $masterchartofaccount)
     {
-        return view('masterchartofaccount.edit', compact('masterchartofaccount'));
+        return view('masterchartofaccounts.edit', compact('masterchartofaccount'));
     }
 
     /**
@@ -104,7 +104,25 @@ class MasterChartofAccountController extends Controller
         $masterChartofAccount->delete();
 
         return redirect()
-            ->route('masterchartofaccount.index')
+            ->route('masterchartofaccounts.index')
             ->with('success', 'Master Chart of Account deleted successfully.');
+    }
+
+    public function data(Request $request)
+    {
+        $masterchartofaccounts = MasterChartofAccount::latest()->get();
+        if ($request->ajax()) {
+            return datatables()
+                ->of($masterchartofaccounts)
+                ->addIndexColumn()
+                ->addColumn('action', function($masterchartofaccounts){
+                    return '
+                        <a href="/masterchartofaccounts/'. $masterchartofaccounts->id .'/edit" class="edit btn btn-success btn-sm">Edit</a> 
+                        <button class="delete btn btn-danger btn-sm" data-remote="/masterchartofaccounts/'. $masterchartofaccounts->id .'">Delete</button>
+                    ';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 }

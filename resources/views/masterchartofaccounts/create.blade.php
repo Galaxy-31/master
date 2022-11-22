@@ -1,21 +1,21 @@
 @extends('layouts.master')
 
 @section('title')
-    - Edit
+    - Create
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit Category</h2>
+                <h2>Add New Chart of Account</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('mastercategorycoas.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('masterchartofaccounts.index') }}"> Back</a>
             </div>
         </div>
     </div>
-    <br>    
+    <br>  
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -27,16 +27,22 @@
         </div>
     @endif
         
-    <form action="{{ route('mastercategorycoas.update', $mastercategorycoa->id) }}" method="POST" enctype="multipart/form-data"> 
+    <form action="{{ route('masterchartofaccounts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-
-        @method('PUT')
         
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Code</strong>
+                    <input type="text" name="code" class="form-control" placeholder="Code" autofocus>
+                </div>
+                <div class="form-group">
+                    <strong>Name</strong>
+                    <input type="text" name="name" class="form-control" placeholder="Name" autofocus>
+                </div>
+                <div class="form-group">
                     <strong>Category</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Category" value="{{$mastercategorycoa->name}}">
+                    <input type="text" name="category" class="form-control" placeholder="Category" autofocus>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

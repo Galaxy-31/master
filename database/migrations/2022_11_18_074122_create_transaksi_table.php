@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
+            $table->date("dates");
             $table->integer("code");
             $table->string("name");
             $table->string("desc");
-            $table->integer("debit");
-            $table->integer("credit");
+            $table->integer("debit")->default(0);
+            $table->integer("credit")->default(0);
             $table->timestamps();
         });
     }

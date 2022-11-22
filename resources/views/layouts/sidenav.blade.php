@@ -29,21 +29,21 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('categories') }}">
+        <a class="nav-link" href="{{ url('mastercategorycoas') }}">
             <i class="fas fa-cubes"></i>
             <span>Category</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{ url('masterchartofaccounts') }}">
             <i class="fas fa-chart-bar"></i>
             <span>Chart of Account</span></a>
     </li>
     
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{ url('transaksis') }}">
             <i class="fas fa-receipt"></i>
             <span>Transaksi</span></a>
     </li>

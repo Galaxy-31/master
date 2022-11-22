@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
 @section('title')
-   - Categories
+   - Chart of Account
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Categories</h2>
+                <h2>Chart of Account</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('mastercategorycoas.create') }}"> Create</a>
+                <a class="btn btn-success" href="{{ route('masterchartofaccounts.create') }}"> Create</a>
             </div>
         </div>
     </div>
@@ -21,11 +21,13 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Category Name</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Category</th>
                 <th>Action</th>
             </tr>
         </thead>
-        @foreach ($mastercategorycoas as $mastercategorycoa)
+        @foreach ($masterchartofaccounts as $masterchartofaccount)
             <tbody>
             </tbody>
         @endforeach
@@ -38,7 +40,7 @@
             var table = $('#example').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('mastercategorycoas.data') }}",
+                ajax: "{{ route('masterchartofaccounts.data') }}",
                 columns: [{
                         data: "DT_RowIndex",
                         name: "DT_RowIndex",
@@ -46,8 +48,16 @@
                         searchable: false
                     },
                     {
+                        data: "code",
+                        name: "code"
+                    },
+                    {
                         data: "name",
                         name: "name"
+                    },
+                    {
+                        data: "category",
+                        name: "category"
                     },
                     {
                         data: "action",

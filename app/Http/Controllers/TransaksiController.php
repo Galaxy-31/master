@@ -60,7 +60,7 @@ class TransaksiController extends Controller
      */
     public function show(Transaksi $transaksi)
     {
-        return view('transaksis.show', compact('transaksis'));
+        
     }
 
     /**
@@ -71,7 +71,7 @@ class TransaksiController extends Controller
      */
     public function edit(Transaksi $transaksi)
     {
-        return view('transaksis.edit', compact('transaksis'));
+        return view('transaksis.edit', compact('transaksi'));
     }
 
     /**
@@ -88,8 +88,8 @@ class TransaksiController extends Controller
             'code' => 'required',
             'name' => 'required',
             'desc' => 'required',
-            'debit' => 'required',
-            'credit' => 'required',
+            'debit' => '',
+            'credit' => '',
         ]);
 
         $transaksi->update($request->all());
@@ -112,5 +112,23 @@ class TransaksiController extends Controller
         return redirect()
             ->route('transaksis.index')
             ->with('success', 'Transaksi deleted successfully.');
+    }
+
+    public function data(Request $request)
+    {
+        $transaksis = Transaksi::latest()->get();
+        if ($request->ajax()) {
+            return datatables()
+                ->of($transaksis)
+                ->addIndexColumn()
+                ->addColumn('action', function($transaksis){
+                    return '
+                        <a href="/transaksis/'. $transaksis->id .'/edit" class="edit btn btn-success btn-sm">Edit</a> 
+                        <button class="delete btn btn-danger btn-sm" data-remote="/transaksis/'. $transaksis->id .'">Delete</button>
+                    ';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 }

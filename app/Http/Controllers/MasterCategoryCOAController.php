@@ -44,7 +44,7 @@ class MasterCategoryCOAController extends Controller
         MasterCategoryCOA::create($request->all());
 
         return redirect()
-            ->route('categories.index')
+            ->route('mastercategorycoas.index')
             ->with('success', 'Master Category COA created successfully.');
     }
 
@@ -56,7 +56,7 @@ class MasterCategoryCOAController extends Controller
      */
     public function show(MasterCategoryCOA $masterCategoryCOA)
     {
-        return view('mastercategorycoas.show', compact('mastercategorycoas'));
+
     }
 
     /**
@@ -65,9 +65,9 @@ class MasterCategoryCOAController extends Controller
      * @param  \App\Models\MasterCategoryCOA  $masterCategoryCOA
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterCategoryCOA $masterCategoryCOA)
+    public function edit(MasterCategoryCOA $mastercategorycoa)
     {
-        return view('mastercategorycoas.edit', compact('mastercategorycoas'));
+        return view('mastercategorycoas.edit', compact('mastercategorycoa'));
     }
 
     /**
@@ -107,17 +107,15 @@ class MasterCategoryCOAController extends Controller
 
     public function data(Request $request)
     {
-        $mastercategorycoas = MasterCategoryCOA::latest();
-        
-        dd($mastercategorycoas);
+        $mastercategorycoas = MasterCategoryCOA::latest()->get();
         if ($request->ajax()) {
             return datatables()
                 ->of($mastercategorycoas)
                 ->addIndexColumn()
                 ->addColumn('action', function($mastercategorycoas){
                     return '
-                        <a href="/categories/'. $mastercategorycoas->id .'/edit" class="edit btn btn-success btn-sm">Edit</a> 
-                        <button class="delete btn btn-danger btn-sm" data-remote="/categories/'. $mastercategorycoas->id .'">Delete</button>
+                        <a href="/mastercategorycoas/'. $mastercategorycoas->id .'/edit" class="edit btn btn-success btn-sm">Edit</a> 
+                        <button class="delete btn btn-danger btn-sm" data-remote="/mastercategorycoas/'. $mastercategorycoas->id .'">Delete</button>
                     ';
                 })
                 ->rawColumns(['action'])

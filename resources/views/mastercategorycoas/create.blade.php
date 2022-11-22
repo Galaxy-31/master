@@ -11,7 +11,7 @@
                 <h2>Add New Category</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('categories.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('mastercategorycoas.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
         </div>
     @endif
         
-    <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('mastercategorycoas.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="row">

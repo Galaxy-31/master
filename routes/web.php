@@ -20,9 +20,10 @@ Route::get('/', function () {
     return view('layouts.master');
 });
 
-Route::resource('categories', MasterCategoryCOAController::class);
-Route::get('categories/data', [MasterCategoryCOAController::class, 'data'])->name('categories.data');
+Route::get('mastercategorycoas/data', [MasterCategoryCOAController::class, 'data'])->name('mastercategorycoas.data');
+Route::get('masterchartofaccounts/data', [MasterChartofAccountController::class, 'data'])->name('masterchartofaccounts.data');
+Route::get('transaksis/data', [TransaksiController::class, 'data'])->name('transaksis.data');
 
-Route::resource('coa', MasterChartofAccountController::class);
-
-Route::resource('transaksi', TransaksiController::class);
+Route::resource('mastercategorycoas', MasterCategoryCOAController::class);
+Route::resource('masterchartofaccounts', MasterChartofAccountController::class);
+Route::resource('transaksis', TransaksiController::class);
