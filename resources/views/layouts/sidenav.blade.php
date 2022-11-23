@@ -40,7 +40,7 @@
             <i class="fas fa-chart-bar"></i>
             <span>Chart of Account</span></a>
     </li>
-    
+
     <!-- Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link" href="{{ url('transaksis') }}">
