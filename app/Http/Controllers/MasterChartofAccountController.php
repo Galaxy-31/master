@@ -57,7 +57,6 @@ class MasterChartofAccountController extends Controller
      */
     public function show(MasterChartofAccount $masterChartofAccount)
     {
-        
     }
 
     /**
@@ -115,14 +114,19 @@ class MasterChartofAccountController extends Controller
             return datatables()
                 ->of($masterchartofaccounts)
                 ->addIndexColumn()
-                ->addColumn('action', function($masterchartofaccounts){
+                ->addColumn('action', function ($masterchartofaccounts) {
                     return '
-                        <a href="/masterchartofaccounts/'. $masterchartofaccounts->id .'/edit" class="edit btn btn-success btn-sm">Edit</a> 
-                        <button class="delete btn btn-danger btn-sm" data-remote="/masterchartofaccounts/'. $masterchartofaccounts->id .'">Delete</button>
+                        <a href="/masterchartofaccounts/' . $masterchartofaccounts->id . '/edit" class="edit btn btn-success btn-sm">Edit</a> 
+                        <button class="delete btn btn-danger btn-sm" data-remote="/masterchartofaccounts/' . $masterchartofaccounts->id . '">Delete</button>
                     ';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+    public function cetak()
+    {
+        return view('masterchartofaccounts.cetak');
     }
 }
