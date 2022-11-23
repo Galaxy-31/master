@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Chart;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Exports\TransactionExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use App\Http\Requests\TransactionRequest;
 
 class TransactionController extends Controller
@@ -18,6 +21,11 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::all();
         return view('transactions.index', compact('transactions'));
+    }
+    
+    public function export_excel(Request $request)
+    {
+        return Excel::download(new TransactionExport, 'Laporan Profit Loss.xlsx');
     }
 
     public function data(Request $request)

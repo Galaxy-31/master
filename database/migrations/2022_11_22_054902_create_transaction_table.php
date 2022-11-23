@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string("desc");
             $table->integer("debit")->default(0);
             $table->integer("credit")->default(0);
-            $table->integer("total")->default(0);
             $table->timestamps();
         });
     }

@@ -31,7 +31,6 @@ Route::get('reports/data', [TransactionController::class, 'data'])->name('report
 Route::resource('categorys', CategoryController::class, ['names' => renameResource('categorys')]);
 Route::resource('charts', ChartController::class, ['names' => renameResource('charts')]);
 Route::resource('transactions', TransactionController::class, ['names' => renameResource('transactions')]);
-Route::resource('reports', TransactionController::class, ['names' => renameResource('reports')]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('reports/export', 'ReportsExportController@export');
+Route::get('reports/export', [TransactionController::class, 'export_excel'])->name('reports.excel');
