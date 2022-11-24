@@ -13,10 +13,6 @@
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('transactions.create') }}"> Create</a>
             </div>
-            <br>
-            <div class="pull-right">
-                <a class="btn btn-info" href="{{ route('reports.excel') }}"> Export</a>
-            </div>
         </div>
     </div>
     <br>

@@ -3,14 +3,14 @@
 namespace App\Exports;
 
 use App\Models\Transaction;
-use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class TransactionExport implements FromQuery, WithHeadings
+class TransactionExport implements FromCollection, WithHeadings, ShouldAutoSize, WithMapping
 {
     use Exportable;
 
@@ -20,36 +20,23 @@ class TransactionExport implements FromQuery, WithHeadings
     * @return \Illuminate\Support\Collection
     */
 
-    public function __construct(int $id)
+    public function collection()
     {
-        $this->id = $id;
+        return Transaction::all();
     }
 
-    public function query()
+    public function map($transaction): array
     {
-        return Transaction::query()->where('id', $this->id);
+        return [
+            [
+                $transaction->name,
+                $transaction->dates,
+            ],
+        ];
     }
-    
-    // public function columnFormats(): array
-    // {
-    //     return [
-    //         'A' => NumberFormat::FORMAT_TEXT,
-    //         'B' => NumberFormat::FORMAT_NUMBER,
-    //         'C' => NumberFormat::FORMAT_TEXT,
-    //     ];
-    // }
 
     public function headings(): array
     {
-        return ["your", "headings", "here"];
+        return ["Name"];
     }
-    
-    // public function map($transaction): array
-    // {
-    //     return [
-    //         'Name' => $transaction->name,
-    //         'Total' => $transaction->credit + $transaction->debit,
-    //         'Date' => $transaction->date,
-    //     ];
-    // }
 }
